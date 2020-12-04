@@ -46,6 +46,9 @@ public class TorusUtils{
                 return Promise<[String: String]>.value(lookupData)
             }
         }.then{ data in
+            if let error = lookupData["err"] {
+                throw error
+            }
             return self.getMetadata(dictionary: ["pub_key_X":data["pub_key_X"]!, "pub_key_Y": data["pub_key_Y"]!]).map{ ($0, data) } // Tuple
         }.done{ nonce, data in
             var newData = data
