@@ -102,7 +102,7 @@ public class TorusUtils{
                 return self.commitmentRequest(endpoints: endpoints, verifier: verifierIdentifier, pubKeyX: pubKeyX!, pubKeyY: pubKeyY!, timestamp: timestamp, tokenCommitment: hashedOnce)
             }.then{ data -> Promise<[Int:[String:String]]> in
                     self.logger.info("retrieveShares: data after commitment request", data)
-                    return self.retrieveIndividualNodeShare(endpoints: endpoints, extraParams: extraParams, verifier: verifierIdentifier, tokenCommitment: hashedOnce, nodeSignatures: data, verifierId: verifierId)
+                    return self.retrieveIndividualNodeShare(endpoints: endpoints, extraParams: extraParams, verifier: verifierIdentifier, tokenCommitment: idToken, nodeSignatures: data, verifierId: verifierId)
             }.then{ data -> Promise<[Int:String]> in
                 self.logger.trace("retrieveShares: data after retrieveIndividualNodeShare", data)
                 if let temp  = data.first{
