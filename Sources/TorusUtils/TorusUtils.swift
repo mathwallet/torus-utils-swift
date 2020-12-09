@@ -39,7 +39,9 @@ public class TorusUtils{
                     // Do keylookup again
                     return self.keyLookup(endpoints: endpoints, verifier: verifier, verifierId: verifierId)
                 }.then{ data -> Promise<[String: String]> in
-                    
+                    if let error = data["err"] {
+                        throw error
+                    }
                     return Promise<[String: String]>.value(data)
                 }
             }else{
